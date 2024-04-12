@@ -1,37 +1,23 @@
 package ventanadisco;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import modelo.Dao;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 
-public class Comprarentradas extends JFrame {
+public class Comprarentradas extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Comprarentradas frame = new Comprarentradas();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public Comprarentradas() {
+	private Dao dao;
+	public Comprarentradas(Dao dao) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 645);
 		contentPane = new JPanel();
@@ -44,6 +30,11 @@ public class Comprarentradas extends JFrame {
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(369, 40, 45, 13);
 		contentPane.add(lblNewLabel);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

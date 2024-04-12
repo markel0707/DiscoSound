@@ -1,36 +1,22 @@
 package ventanadisco;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import modelo.Dao;
+
 import javax.swing.UIManager;
 
-public class DeseasPagar extends JFrame {
+public class DeseasPagar extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					DeseasPagar frame = new DeseasPagar();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public DeseasPagar() {
+	private Dao dao;
+	public DeseasPagar(Dao dao) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 537, 272);
 		contentPane = new JPanel();
@@ -39,6 +25,11 @@ public class DeseasPagar extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

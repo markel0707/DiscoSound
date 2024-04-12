@@ -5,36 +5,23 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import modelo.Dao;
+
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JLabel;
 
-public class Inicio extends JFrame {
+public class Inicio extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Inicio frame = new Inicio();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public Inicio() {
+	private Dao dao;
+	public Inicio(Dao dao) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 645);
 		contentPane = new JPanel();
@@ -60,5 +47,10 @@ public class Inicio extends JFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 30));
 		lblNewLabel.setBounds(318, 76, 192, 79);
 		contentPane.add(lblNewLabel);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

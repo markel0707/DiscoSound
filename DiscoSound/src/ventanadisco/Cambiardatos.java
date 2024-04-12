@@ -5,40 +5,29 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import modelo.Dao;
+
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Color;
 
-public class Cambiardatos extends JFrame {
+public class Cambiardatos extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
 	private JTextField txtSa;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Cambiardatos frame = new Cambiardatos();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public Cambiardatos() {
+	private Dao dao;
+	
+	
+	public Cambiardatos(Dao dao) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 645);
 		contentPane = new JPanel();
@@ -107,6 +96,12 @@ public class Cambiardatos extends JFrame {
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnNewButton_1.setBounds(21, 560, 85, 38);
 		contentPane.add(btnNewButton_1);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

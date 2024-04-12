@@ -5,38 +5,25 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import modelo.Dao;
+
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Color;
 
-public class IniciarSesion extends JFrame {
+public class IniciarSesion extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					IniciarSesion frame = new IniciarSesion();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public IniciarSesion() {
+	private Dao dao;
+	public IniciarSesion(Dao dao) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 645);
 		contentPane = new JPanel();
@@ -84,6 +71,11 @@ public class IniciarSesion extends JFrame {
 		btnSiguiente.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnSiguiente.setBounds(751, 554, 101, 21);
 		contentPane.add(btnSiguiente);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
