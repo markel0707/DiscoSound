@@ -1,22 +1,24 @@
 package ventanadisco;
 
-import java.awt.EventQueue;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import modelo.Dao;
 
-import javax.swing.UIManager;
-
-public class DeseasPagar extends JFrame implements ActionListener{
+public class VdeseasPagar extends JDialog implements ActionListener{
 
 	private JPanel contentPane;
 	private Dao dao;
-	public DeseasPagar(Dao dao) {
+	public VdeseasPagar(Dao dao) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 537, 272);
 		contentPane = new JPanel();
