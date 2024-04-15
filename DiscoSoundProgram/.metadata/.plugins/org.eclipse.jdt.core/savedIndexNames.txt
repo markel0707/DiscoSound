@@ -1,4 +1,0 @@
-INDEX VERSION 1.134+C:\Users\1dam\Desktop\DiscoSoundProgram\.metadata\.plugins\org.eclipse.jdt.core
-1356540821.index
-3774613555.index
-1865797976.index
