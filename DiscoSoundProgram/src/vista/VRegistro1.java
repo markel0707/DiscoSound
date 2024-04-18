@@ -187,12 +187,12 @@ public class VRegistro1 extends JDialog implements ActionListener {
 				return true;
 			} else {
 				System.out.println("DNI no valido");
-				JOptionPane.showMessageDialog(this, "DNI no valido");
+				JOptionPane.showMessageDialog(this, "DNI no valido (Los numeros no corresponden con la letra)");
 				return false;
 			}
 
 		} else {
-			JOptionPane.showMessageDialog(this, "DNI no valido");
+			JOptionPane.showMessageDialog(this, "DNI no valido ");
 			return false;
 		}
 
