@@ -13,7 +13,7 @@ import javax.swing.border.EmptyBorder;
 
 import modelo.Dao;
 
-public class VInicio extends JFrame implements ActionListener{
+public class VInicio extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -21,9 +21,8 @@ public class VInicio extends JFrame implements ActionListener{
 	private JButton btnRegistrar;
 	private Dao dao;
 
-	
 	public VInicio(Dao dao) {
-		this.dao=dao;
+		this.dao = dao;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 645);
 		contentPane = new JPanel();
@@ -32,49 +31,46 @@ public class VInicio extends JFrame implements ActionListener{
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		btnRegistrar = new JButton("Registrar");
 		btnRegistrar.setBackground(new Color(192, 192, 192));
 		btnRegistrar.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnRegistrar.setBounds(335, 291, 185, 52);
 		btnRegistrar.addActionListener(this);
 		contentPane.add(btnRegistrar);
-		
+
 		btnIniciarSesion = new JButton("Iniciar Sesion");
 		btnIniciarSesion.setBackground(new Color(192, 192, 192));
 		btnIniciarSesion.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnIniciarSesion.setBounds(335, 392, 185, 52);
 		btnIniciarSesion.addActionListener(this);
 		contentPane.add(btnIniciarSesion);
-		
+
 		JLabel lblNewLabel = new JLabel("DiscoSound");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 30));
 		lblNewLabel.setBounds(335, 75, 185, 79);
 		contentPane.add(lblNewLabel);
 	}
 
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		if(e.getSource().equals(btnIniciarSesion)) {
+		if (e.getSource().equals(btnIniciarSesion)) {
 			iniciarSesion();
-		}else if(e.getSource().equals(btnRegistrar)) {
+		} else if (e.getSource().equals(btnRegistrar)) {
 			registrar();
 		}
 	}
 
-
 	private void iniciarSesion() {
-		
-		
+
 	}
 
-
 	private void registrar() {
-		VRegistro1 registro=new VRegistro1(dao);
+
+		VRegistro1 registro = new VRegistro1(dao);
 		registro.setVisible(true);
 		this.dispose();
-		
+
 	}
 }

@@ -11,6 +11,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import clase.Cliente;
+import clase.Usuario;
 import modelo.Dao;
 import java.awt.Color;
 import javax.swing.JTextField;
@@ -26,12 +28,17 @@ public class VRegistro2 extends JDialog implements ActionListener {
 	private JTextField textNombre;
 	private JTextField textApellido;
 	private JTextField textUsuario;
-	private JTextField textContraseña;
+	private JTextField textContraseina;
 	private ButtonGroup bgGenero = new ButtonGroup();
-	private JCheckBox CheckBoxHombre;
-	private JCheckBox CheckBoxMujer;
+	private JCheckBox checkBoxHombre;
+	private JCheckBox checkBoxMujer;
+	private JButton btnAtras;
+	private JButton btnSiguiente;
+	private Usuario usu;
 
-	public VRegistro2(Dao dao) {
+	public VRegistro2(Dao dao, Usuario usu) {
+		this.dao=dao;
+		this.usu=usu;
 		setBounds(100, 100, 900, 645);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(255, 128, 0));
@@ -56,17 +63,17 @@ public class VRegistro2 extends JDialog implements ActionListener {
 		lblNewLabel_1.setBounds(0, 0, 76, 25);
 		contentPanel.add(lblNewLabel_1);
 
-		CheckBoxHombre = new JCheckBox("Hombre");
-		CheckBoxHombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		CheckBoxHombre.setBackground(UIManager.getColor("Button.shadow"));
-		CheckBoxHombre.setBounds(334, 393, 93, 21);
-		contentPanel.add(CheckBoxHombre);
+		checkBoxHombre = new JCheckBox("Hombre");
+		checkBoxHombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		checkBoxHombre.setBackground(UIManager.getColor("Button.shadow"));
+		checkBoxHombre.setBounds(334, 393, 93, 21);
+		contentPanel.add(checkBoxHombre);
 
-		CheckBoxMujer = new JCheckBox("Mujer");
-		CheckBoxMujer.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		CheckBoxMujer.setBackground(UIManager.getColor("Button.shadow"));
-		CheckBoxMujer.setBounds(334, 416, 93, 21);
-		contentPanel.add(CheckBoxMujer);
+		checkBoxMujer = new JCheckBox("Mujer");
+		checkBoxMujer.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		checkBoxMujer.setBackground(UIManager.getColor("Button.shadow"));
+		checkBoxMujer.setBounds(334, 416, 93, 21);
+		contentPanel.add(checkBoxMujer);
 
 		JLabel lblApellido = new JLabel("Apellido");
 		lblApellido.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -97,37 +104,59 @@ public class VRegistro2 extends JDialog implements ActionListener {
 		lblContraseina.setBounds(334, 317, 93, 13);
 		contentPanel.add(lblContraseina);
 
-		textContraseña = new JTextField();
-		textContraseña.setFont(new Font("Tahoma", Font.BOLD, 16));
-		textContraseña.setColumns(10);
-		textContraseña.setBackground(Color.LIGHT_GRAY);
-		textContraseña.setBounds(334, 339, 172, 25);
-		contentPanel.add(textContraseña);
+		textContraseina = new JTextField();
+		textContraseina.setFont(new Font("Tahoma", Font.BOLD, 16));
+		textContraseina.setColumns(10);
+		textContraseina.setBackground(Color.LIGHT_GRAY);
+		textContraseina.setBounds(334, 339, 172, 25);
+		contentPanel.add(textContraseina);
 
 		JLabel lblGenero = new JLabel("Genero");
 		lblGenero.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblGenero.setBounds(334, 374, 93, 13);
 		contentPanel.add(lblGenero);
 
-		JButton btnAtras = new JButton("Atras");
+		btnAtras = new JButton("Atras");
 		btnAtras.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnAtras.setBounds(13, 577, 85, 21);
+		btnAtras.addActionListener(this);
 		contentPanel.add(btnAtras);
 
-		JButton btnSiguiente = new JButton("Siguiente");
+		btnSiguiente = new JButton("Siguiente");
 		btnSiguiente.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnSiguiente.setBounds(765, 577, 101, 21);
+		btnSiguiente.addActionListener(this);
 		contentPanel.add(btnSiguiente);
 
-		bgGenero.add(CheckBoxHombre);
-		bgGenero.add(CheckBoxMujer);
+		bgGenero.add(checkBoxHombre);
+		bgGenero.add(checkBoxMujer);
 
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		
+		if(e.getSource().equals(btnSiguiente)) {
+			siguiente();
+		}
+		
+	}
 
+	private void siguiente() {
+		
+		Cliente cli =new Cliente();
+		usu.setNombre(textNombre.getText());
+		usu.setApellido(textApellido.getText());
+		usu.setNomUsu(textUsuario.getText());
+		usu.setContraseina(textContraseina.getText());
+		if(checkBoxHombre.isSelected()) {
+			cli.setGenero("hombre");
+		}else if(checkBoxMujer.isSelected()) {
+			cli.setGenero("mujer");
+		}
+		dao.registro(usu, cli);
+		
+		
 	}
 
 }
