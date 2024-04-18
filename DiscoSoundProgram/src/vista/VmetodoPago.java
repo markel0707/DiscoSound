@@ -1,0 +1,98 @@
+package vista;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import modelo.Dao;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+
+public class VmetodoPago extends JDialog implements ActionListener{
+
+		private JPanel contentPane;
+		private Dao dao;
+		private JTextField textField;
+		private JTextField textField_1;
+		public VmetodoPago(Dao dao) {
+			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			setBounds(100, 100, 900, 645);
+			contentPane = new JPanel();
+			contentPane.setBackground(new Color(255, 128, 0));
+			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+			setContentPane(contentPane);
+			contentPane.setLayout(null);
+			
+			JLabel lblMetodoDePago = new JLabel("Metodo de pago");
+			lblMetodoDePago.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 30));
+			lblMetodoDePago.setBounds(291, 33, 284, 54);
+			contentPane.add(lblMetodoDePago);
+			
+			JLabel lblMetodoDePago_1 = new JLabel("Metodo de pago");
+			lblMetodoDePago_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			lblMetodoDePago_1.setBounds(93, 136, 142, 20);
+			contentPane.add(lblMetodoDePago_1);
+			
+			JLabel lblCantidad = new JLabel("Cantidad entradas");
+			lblCantidad.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			lblCantidad.setBounds(93, 341, 130, 13);
+			contentPane.add(lblCantidad);
+			
+			JLabel lblTelefonoOTarjeta = new JLabel("Telefono o Tarjeta de credito");
+			lblTelefonoOTarjeta.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			lblTelefonoOTarjeta.setBounds(552, 136, 209, 20);
+			contentPane.add(lblTelefonoOTarjeta);
+			
+			JLabel lblGenero = new JLabel("Genero");
+			lblGenero.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			lblGenero.setBounds(552, 341, 96, 13);
+			contentPane.add(lblGenero);
+			
+			JButton btnAtras = new JButton("Atras");
+			btnAtras.setFont(new Font("Tahoma", Font.BOLD, 14));
+			btnAtras.setBounds(41, 500, 85, 38);
+			contentPane.add(btnAtras);
+			
+			JButton btnPagar = new JButton("Pagar");
+			btnPagar.setFont(new Font("Tahoma", Font.BOLD, 14));
+			btnPagar.setBounds(760, 500, 85, 38);
+			contentPane.add(btnPagar);
+			
+			textField = new JTextField();
+			textField.setColumns(10);
+			textField.setBackground(Color.LIGHT_GRAY);
+			textField.setBounds(93, 364, 130, 25);
+			contentPane.add(textField);
+			
+			textField_1 = new JTextField();
+			textField_1.setColumns(10);
+			textField_1.setBackground(Color.LIGHT_GRAY);
+			textField_1.setBounds(552, 160, 234, 25);
+			contentPane.add(textField_1);
+			
+			JComboBox comboBox_pago = new JComboBox();
+			comboBox_pago.setBounds(93, 166, 165, 21);
+			contentPane.add(comboBox_pago);
+			
+			JComboBox comboBox_Genero = new JComboBox();
+			comboBox_Genero.setBounds(552, 364, 165, 21);
+			contentPane.add(comboBox_Genero);
+		}
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+	}
+
