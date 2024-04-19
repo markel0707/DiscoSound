@@ -19,8 +19,9 @@ public class VcompraEntradas extends JDialog implements ActionListener{
 
 		private JPanel contentPane;
 		private Dao dao;
+		private JButton btnInicio;
+		private JButton btnPrueba;
 		public VcompraEntradas(Dao dao) {
-			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setBounds(100, 100, 900, 645);
 			contentPane = new JPanel();
 			contentPane.setBackground(new Color(255, 128, 0));
@@ -32,11 +33,39 @@ public class VcompraEntradas extends JDialog implements ActionListener{
 			JLabel lblponerNombre = new JLabel("");
 			lblponerNombre.setBounds(369, 40, 45, 13);
 			contentPane.add(lblponerNombre);
+			
+			btnInicio = new JButton("INICIO");
+			btnInicio.setBounds(420, 490, 89, 40);
+			btnInicio.addActionListener(this);
+			contentPane.add(btnInicio);
+			
+			btnPrueba = new JButton("Prueba");
+			btnPrueba.setBounds(120, 490, 89, 40);
+			btnPrueba.addActionListener(this);
+			contentPane.add(btnPrueba);
+			
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			if (e.getSource().equals(btnInicio)) {
+				inicio();
+			} else if(e.getSource().equals(btnPrueba)) {
+				prueba();
+			}
 			
 		}
-
+		private void prueba() {
+			// TODO Auto-generated method stub
+			VmetodoPago prueba = new VmetodoPago(dao);
+			prueba.setVisible(true);
+			this.dispose();
+			
+		}
+		private void inicio() {
+			// TODO Auto-generated method stub
+			VperfilUsuario inicio = new VperfilUsuario(dao);
+			inicio.setVisible(true);
+			this.dispose();		
+			}
 	}

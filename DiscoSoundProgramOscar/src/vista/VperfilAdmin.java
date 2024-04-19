@@ -24,8 +24,12 @@ public class VperfilAdmin extends JFrame implements ActionListener{
 	private JPanel contentPane;
 	private JTextField datoNombre;
 	private Dao dao;
+	private JButton btnNuevaEntrada;
+	private JButton btnModificarEntrada;
+	private JButton btnCerrarSesion;
+	
+	
 	public VperfilAdmin(Dao dao) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 645);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 128, 0));
@@ -50,27 +54,55 @@ public class VperfilAdmin extends JFrame implements ActionListener{
 		contentPane.add(datoNombre);
 		datoNombre.setColumns(10);
 		
-		JButton btnNuevaEntrada = new JButton("Nueva entrada");
+		btnNuevaEntrada = new JButton("Nueva entrada");
 		btnNuevaEntrada.setBackground(Color.LIGHT_GRAY);
 		btnNuevaEntrada.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnNuevaEntrada.setBounds(36, 540, 127, 43);
+		btnNuevaEntrada.addActionListener(this);
 		contentPane.add(btnNuevaEntrada);
 		
-		JButton btnModificarEntrada = new JButton("Modificar entrada");
+		btnModificarEntrada = new JButton("Modificar entrada");
 		btnModificarEntrada.setBackground(Color.LIGHT_GRAY);
 		btnModificarEntrada.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnModificarEntrada.setBounds(706, 540, 141, 43);
+		btnModificarEntrada.addActionListener(this);
 		contentPane.add(btnModificarEntrada);
 		
-		JButton btnCerrarSesion = new JButton("Cerrar sesion");
+		btnCerrarSesion = new JButton("Cerrar sesion");
 		btnCerrarSesion.setBackground(Color.LIGHT_GRAY);
 		btnCerrarSesion.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnCerrarSesion.setBounds(732, 23, 115, 21);
+		btnCerrarSesion.addActionListener(this);
 		contentPane.add(btnCerrarSesion);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		if (e.getSource().equals(btnNuevaEntrada)) {
+			nuevaEntrada();
+		} else if(e.getSource().equals(btnModificarEntrada)) {
+			modificarEntrada();
+		} else if(e.getSource().equals(btnCerrarSesion)) {
+			cerrarSesion();
+		}
+	}
+	private void cerrarSesion() {
+		// TODO Auto-generated method stub
+		VInicio cerrarSesion = new VInicio(dao);
+		cerrarSesion.setVisible(true);
+		this.dispose();
 		
+	}
+	private void modificarEntrada() {
+		// TODO Auto-generated method stub
+		VModificarentrada modificarEntrada = new VModificarentrada(dao);
+		modificarEntrada.setVisible(true);
+		this.dispose();
+	}
+	private void nuevaEntrada() {
+		// TODO Auto-generated method stub
+		VNuevaentrada nuevaEntrada = new VNuevaentrada(dao);
+		nuevaEntrada.setVisible(true);
+		this.dispose();
 	}
 }

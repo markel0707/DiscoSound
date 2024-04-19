@@ -103,7 +103,10 @@ public class VRegistro1 extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(btnSiguiente)) {
 			siguiente();
+		} else if(e.getSource().equals(btnAtras)) {
+			atras();
 		}
+<<<<<<< HEAD:DiscoSoundProgram/src/vista/VRegistro1.java
 
 	}
 
@@ -137,6 +140,20 @@ public class VRegistro1 extends JDialog implements ActionListener {
 
 		}
 
+=======
+	}
+
+	private void siguiente() {
+		VperfilUsuario siguiente=new VperfilUsuario(dao);
+		siguiente.setVisible(true);
+		this.dispose();
+	}
+	
+	private void atras() {
+		VInicio atras=new VInicio(dao);
+		atras.setVisible(true);
+		this.dispose();
+>>>>>>> ef59ea85cb864b7c3a1084c9e8044667235335a6:DiscoSoundProgramOscar/src/vista/VRegistro1.java
 	}
 
 	private boolean comprobarEdad(LocalDate fechaNac) {

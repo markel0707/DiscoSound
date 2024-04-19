@@ -28,9 +28,13 @@ public class VperfilUsuario extends JDialog implements ActionListener{
 		private JTextField DatoNombre;
 		private JTextField DatoDni;
 		private Dao dao;
+		private JButton btnComprarEntradas;
+		private JButton btnDescuentosDisp;
+		private JButton btnCambiarDatos;
+		private JButton btnCerrarSesion;
 
 		public VperfilUsuario(Dao dao) {
-			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			
 			setBounds(100, 100, 900, 645);
 			contentPane = new JPanel();
 			contentPane.setBackground(new Color(255, 128, 0));
@@ -60,28 +64,32 @@ public class VperfilUsuario extends JDialog implements ActionListener{
 			lblentradas.setBounds(508, 191, 80, 13);
 			contentPane.add(lblentradas);
 			
-			JButton btnComprarEntradas = new JButton("Comprar Entradas");
+			btnComprarEntradas = new JButton("Comprar Entradas");
 			btnComprarEntradas.setBackground(Color.LIGHT_GRAY);
 			btnComprarEntradas.setFont(new Font("Tahoma", Font.BOLD, 14));
 			btnComprarEntradas.setBounds(33, 542, 168, 42);
+			btnComprarEntradas.addActionListener(this);
 			contentPane.add(btnComprarEntradas);
 			
-			JButton btnDescuentosDisp = new JButton("Descuentos disponibles");
+			btnDescuentosDisp = new JButton("Descuentos disponibles");
 			btnDescuentosDisp.setBackground(Color.LIGHT_GRAY);
 			btnDescuentosDisp.setFont(new Font("Tahoma", Font.BOLD, 14));
 			btnDescuentosDisp.setBounds(248, 542, 201, 42);
+			btnDescuentosDisp.addActionListener(this);
 			contentPane.add(btnDescuentosDisp);
 			
-			JButton btnCambiarDatos = new JButton("Cambiar datos");
+			btnCambiarDatos = new JButton("Cambiar datos");
 			btnCambiarDatos.setBackground(Color.LIGHT_GRAY);
 			btnCambiarDatos.setFont(new Font("Tahoma", Font.BOLD, 14));
 			btnCambiarDatos.setBounds(496, 542, 159, 42);
+			btnCambiarDatos.addActionListener(this);
 			contentPane.add(btnCambiarDatos);
 			
-			JButton btnCerrarSesion = new JButton("Cerrar Sesion");
+			btnCerrarSesion = new JButton("Cerrar Sesion");
 			btnCerrarSesion.setBackground(Color.LIGHT_GRAY);
 			btnCerrarSesion.setFont(new Font("Tahoma", Font.BOLD, 14));
 			btnCerrarSesion.setBounds(708, 542, 131, 42);
+			btnCerrarSesion.addActionListener(this);
 			contentPane.add(btnCerrarSesion);
 			
 			DatoNombre = new JTextField();
@@ -101,5 +109,43 @@ public class VperfilUsuario extends JDialog implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			
+			if(e.getSource().equals(btnComprarEntradas)) {
+				comprarEntradas();
+			} else if(e.getSource().equals(btnDescuentosDisp)) {
+				descuentosDisp();
+			} else if(e.getSource().equals(btnCambiarDatos)) {
+				cambiarDatos();
+			} else if(e.getSource().equals(btnCerrarSesion)) {
+				cerrarSesion();
+			}
+			
 		}
+		
+		private void cerrarSesion() {
+			// TODO Auto-generated method stub
+			VInicio cerrarSesion = new VInicio(dao);
+			cerrarSesion.setVisible(true);
+			this.dispose();
+		}
+
+		private void cambiarDatos() {
+			VcambiarDatos cambiarDatos = new VcambiarDatos(dao);
+			cambiarDatos.setVisible(true);
+			this.dispose();
+			
+		}
+
+		private void descuentosDisp() {
+			// TODO Auto-generated method stub
+			VdescuentosDisponibles descuentosDisp = new VdescuentosDisponibles(dao);
+			descuentosDisp.setVisible(true);
+			this.dispose();
+		}
+
+		private void comprarEntradas() {
+			VcompraEntradas compraEntradas = new VcompraEntradas(dao);
+			compraEntradas.setVisible(true);
+			this.dispose();
+		}
+		
 	}

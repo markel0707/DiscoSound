@@ -26,6 +26,8 @@ public class VcambiarDatos extends JDialog implements ActionListener{
 	private JTextField DatoEmail;
 	private JTextField datoApellido;
 	private Dao dao;
+	private JButton btnGuardar;
+	private JButton btnAtras;
 	public VcambiarDatos(Dao dao) {
 		setBounds(100, 100, 900, 645);
 		getContentPane().setLayout(new BorderLayout());
@@ -84,19 +86,37 @@ public class VcambiarDatos extends JDialog implements ActionListener{
 		datoApellido.setBounds(644, 299, 96, 19);
 		contentPanel.add(datoApellido);
 		
-		JButton btnSiguiente = new JButton("Siguiente");
-		btnSiguiente.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnSiguiente.setBounds(644, 498, 133, 38);
-		contentPanel.add(btnSiguiente);
+		btnGuardar = new JButton("Guardar");
+		btnGuardar.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnGuardar.setBounds(644, 498, 133, 38);
+		btnGuardar.addActionListener(this);
+		contentPanel.add(btnGuardar);
 		
-		JButton btnAtras = new JButton("Atras");
+		btnAtras = new JButton("Atras");
 		btnAtras.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnAtras.setBounds(178, 498, 85, 38);
+		btnAtras.addActionListener(this);
 		contentPanel.add(btnAtras);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		if(e.getSource().equals(btnGuardar)) {
+			guardar();
+		} else if (e.getSource().equals(btnAtras)) {
+			atras();
+		}
+	}
+	private void atras() {
+		// TODO Auto-generated method stub
+		VperfilUsuario atras = new VperfilUsuario(dao);
+		atras.setVisible(true);
+		this.dispose();
+	}
+	private void guardar() {
+		// TODO Auto-generated method stub
+		VperfilUsuario guardar = new VperfilUsuario(dao);
+		guardar.setVisible(true);
+		this.dispose();
 	}
 }

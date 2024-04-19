@@ -63,6 +63,14 @@ public class VInicio extends JFrame implements ActionListener {
 	}
 
 	private void iniciarSesion() {
+<<<<<<< HEAD:DiscoSoundProgram/src/vista/VInicio.java
+=======
+		ViniciarSesion iniciarSesion =new ViniciarSesion(dao);
+		iniciarSesion.setVisible(true);
+		this.dispose();
+		
+	}
+>>>>>>> ef59ea85cb864b7c3a1084c9e8044667235335a6:DiscoSoundProgramOscar/src/vista/VInicio.java
 
 	}
 

@@ -26,6 +26,9 @@ import java.awt.Color;
 		private JTextField datoUser;
 		private JTextField datoContrasena;
 		private Dao dao;
+		private JButton btnAtras;
+		private JButton btnSiguiente;
+
 		public ViniciarSesion(Dao dao) {
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setBounds(100, 100, 900, 645);
@@ -63,22 +66,46 @@ import java.awt.Color;
 			datoContrasena.setBounds(315, 275, 204, 30);
 			contentPane.add(datoContrasena);
 			
-			JButton btnAtras = new JButton("Atras");
+			btnAtras = new JButton("Atras");
 			btnAtras.setBackground(Color.LIGHT_GRAY);
 			btnAtras.setFont(new Font("Tahoma", Font.BOLD, 14));
 			btnAtras.setBounds(21, 554, 85, 21);
+			btnAtras.addActionListener(this);
 			contentPane.add(btnAtras);
 			
-			JButton btnSiguiente = new JButton("Siguiente");
+			btnSiguiente = new JButton("Siguiente");
 			btnSiguiente.setBackground(Color.LIGHT_GRAY);
 			btnSiguiente.setFont(new Font("Tahoma", Font.BOLD, 14));
 			btnSiguiente.setBounds(751, 554, 101, 21);
+			btnSiguiente.addActionListener(this);
 			contentPane.add(btnSiguiente);
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			
-		}
+			if (e.getSource().equals(btnSiguiente)) {
+				siguiente();
+			} else if(e.getSource().equals(btnAtras)) {
+				atras();
+			}
+		};
 
+		private void siguiente() {
+			if(datoUser.getText().equalsIgnoreCase("a")) {
+				VperfilAdmin siguiente = new VperfilAdmin(dao);
+				siguiente.setVisible(true);
+				this.dispose();	
+			} else {
+			VperfilUsuario siguiente = new VperfilUsuario(dao);
+			siguiente.setVisible(true);
+			this.dispose();				
+			}
+
+		}
+		
+		private void atras() {
+			VInicio atras=new VInicio(dao);
+			atras.setVisible(true);
+			this.dispose();
+		}
 	}

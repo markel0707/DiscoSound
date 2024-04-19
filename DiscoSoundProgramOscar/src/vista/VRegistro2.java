@@ -2,8 +2,6 @@ package vista;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -11,20 +9,30 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+<<<<<<< HEAD:DiscoSoundProgram/src/vista/VRegistro2.java
 import clase.Cliente;
 import clase.Usuario;
 import controlador.Dao;
 import modelo.DaoImplementacionBD;
 
 import java.awt.Color;
+=======
+import modelo.Dao;
+>>>>>>> ef59ea85cb864b7c3a1084c9e8044667235335a6:DiscoSoundProgramOscar/src/vista/VRegistro2.java
 import javax.swing.JTextField;
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JLabel;
 import javax.swing.JCheckBox;
 import javax.swing.UIManager;
 
 public class VRegistro2 extends JDialog implements ActionListener {
-
+	
+	
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private Dao dao;
 	private JTextField textNombre;
@@ -32,11 +40,18 @@ public class VRegistro2 extends JDialog implements ActionListener {
 	private JTextField textUsuario;
 	private JTextField textContraseina;
 	private ButtonGroup bgGenero = new ButtonGroup();
+<<<<<<< HEAD:DiscoSoundProgram/src/vista/VRegistro2.java
 	private JCheckBox checkBoxHombre;
 	private JCheckBox checkBoxMujer;
 	private JButton btnAtras;
 	private JButton btnSiguiente;
 	private Usuario usu;
+=======
+	private JCheckBox CheckBoxHombre;
+	private JCheckBox CheckBoxMujer;
+	private JButton btnSiguiente;
+	private JButton btnAtras;
+>>>>>>> ef59ea85cb864b7c3a1084c9e8044667235335a6:DiscoSoundProgramOscar/src/vista/VRegistro2.java
 
 	public VRegistro2(Dao dao, Usuario usu) {
 		this.dao=dao;
@@ -137,6 +152,7 @@ public class VRegistro2 extends JDialog implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD:DiscoSoundProgram/src/vista/VRegistro2.java
 		
 		if(e.getSource().equals(btnSiguiente)) {
 			siguiente();
@@ -164,6 +180,26 @@ public class VRegistro2 extends JDialog implements ActionListener {
 		
 		
 		
+=======
+		// TODO Auto-generated method stub
+		if (e.getSource().equals(btnSiguiente)) {
+			siguiente();
+		} else if(e.getSource().equals(btnAtras)) {
+			atras();
+		}
+	};
+
+	private void siguiente() {
+		VperfilUsuario siguiente = new VperfilUsuario(dao);
+		siguiente.setVisible(true);
+		this.dispose();
+	}
+	
+	private void atras() {
+		VRegistro1 atras=new VRegistro1(dao);
+		atras.setVisible(true);
+		this.dispose();
+>>>>>>> ef59ea85cb864b7c3a1084c9e8044667235335a6:DiscoSoundProgramOscar/src/vista/VRegistro2.java
 	}
 
 }
