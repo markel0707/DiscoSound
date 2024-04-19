@@ -22,9 +22,9 @@ public class VdescuentosDisponibles extends JDialog implements ActionListener{
 	private final JPanel contentPanel = new JPanel();
 	private JPanel contentPane;
 	private Dao dao;
+	private JButton btnInicio;
 	
 	public VdescuentosDisponibles(Dao dao) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 645);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 128, 0));
@@ -38,16 +38,26 @@ public class VdescuentosDisponibles extends JDialog implements ActionListener{
 		lbldescuentos.setBounds(218, 23, 382, 50);
 		contentPane.add(lbldescuentos);
 		
-		JButton btnInicio = new JButton("Inicio");
+		btnInicio = new JButton("Inicio");
 		btnInicio.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnInicio.setBounds(392, 545, 85, 21);
+		btnInicio.addActionListener(this);
 		contentPane.add(btnInicio);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		if(e.getSource().equals(btnInicio)) {
+			inicio();
+		}
+	}
+
+	private void inicio() {
+		// TODO Auto-generated method stub
+		VperfilUsuario inicio = new VperfilUsuario(dao);
+		inicio.setVisible(true);
+		this.dispose();
 	}
 
 }

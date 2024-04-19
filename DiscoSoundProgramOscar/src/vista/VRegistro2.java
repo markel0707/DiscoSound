@@ -2,8 +2,6 @@ package vista;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -12,15 +10,20 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import modelo.Dao;
-import java.awt.Color;
 import javax.swing.JTextField;
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JLabel;
 import javax.swing.JCheckBox;
 import javax.swing.UIManager;
 
 public class VRegistro2 extends JDialog implements ActionListener {
-
+	
+	
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private Dao dao;
 	private JTextField textNombre;
@@ -30,6 +33,8 @@ public class VRegistro2 extends JDialog implements ActionListener {
 	private ButtonGroup bgGenero = new ButtonGroup();
 	private JCheckBox CheckBoxHombre;
 	private JCheckBox CheckBoxMujer;
+	private JButton btnSiguiente;
+	private JButton btnAtras;
 
 	public VRegistro2(Dao dao) {
 		setBounds(100, 100, 900, 645);
@@ -109,14 +114,15 @@ public class VRegistro2 extends JDialog implements ActionListener {
 		lblGenero.setBounds(334, 374, 93, 13);
 		contentPanel.add(lblGenero);
 
-		JButton btnAtras = new JButton("Atras");
+		btnAtras = new JButton("Atras");
 		btnAtras.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnAtras.setBounds(13, 577, 85, 21);
 		contentPanel.add(btnAtras);
 
-		JButton btnSiguiente = new JButton("Siguiente");
+		btnSiguiente = new JButton("Siguiente");
 		btnSiguiente.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnSiguiente.setBounds(765, 577, 101, 21);
+		btnSiguiente.addActionListener(this);
 		contentPanel.add(btnSiguiente);
 
 		bgGenero.add(CheckBoxHombre);
@@ -127,7 +133,23 @@ public class VRegistro2 extends JDialog implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		if (e.getSource().equals(btnSiguiente)) {
+			siguiente();
+		} else if(e.getSource().equals(btnAtras)) {
+			atras();
+		}
+	};
 
+	private void siguiente() {
+		VperfilUsuario siguiente = new VperfilUsuario(dao);
+		siguiente.setVisible(true);
+		this.dispose();
+	}
+	
+	private void atras() {
+		VRegistro1 atras=new VRegistro1(dao);
+		atras.setVisible(true);
+		this.dispose();
 	}
 
 }

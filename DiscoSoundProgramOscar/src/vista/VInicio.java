@@ -66,7 +66,9 @@ public class VInicio extends JFrame implements ActionListener{
 
 
 	private void iniciarSesion() {
-		
+		ViniciarSesion iniciarSesion =new ViniciarSesion(dao);
+		iniciarSesion.setVisible(true);
+		this.dispose();
 		
 	}
 

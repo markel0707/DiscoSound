@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JCheckBox;
 import javax.swing.UIManager;
 import com.toedter.calendar.JCalendar;
@@ -94,14 +95,20 @@ public class VRegistro1 extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource().equals(btnSiguiente)) {
 			siguiente();
+		} else if(e.getSource().equals(btnAtras)) {
+			atras();
 		}
-		
 	}
 
 	private void siguiente() {
-		VRegistro2 registro=new VRegistro2(dao);
-		registro.setVisible(true);
+		VperfilUsuario siguiente=new VperfilUsuario(dao);
+		siguiente.setVisible(true);
 		this.dispose();
-		
+	}
+	
+	private void atras() {
+		VInicio atras=new VInicio(dao);
+		atras.setVisible(true);
+		this.dispose();
 	}
 }
