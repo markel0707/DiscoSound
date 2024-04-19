@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
-import modelo.Dao;
+import controlador.Dao;
 
 public class VdeseasPagar extends JDialog implements ActionListener{
 

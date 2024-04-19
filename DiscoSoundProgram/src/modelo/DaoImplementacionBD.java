@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 
 import clase.Cliente;
 import clase.Usuario;
+import controlador.Dao;
 
 public class DaoImplementacionBD implements Dao {
 
@@ -25,8 +26,8 @@ public class DaoImplementacionBD implements Dao {
 	// configuracion
 	
 	//SENTENCIAS SQL
-	final String REGISTRO_USU="insert into usuario (dni, nombre, apellido, nomusu, email, contraseina) values (?,?,?,?,?,?)";
-	final String REGISTRO_CLI="insert into cliente values (?)";
+	final String REGISTRO_USU="insert into usuario (dni, nombre, apellido, nomusu, fechanac ,email, contraseina) values (?,?,?,?,?,?,?)";
+	final String REGISTRO_CLI="insert into cliente (dnicliente, genero) values (?,?)";
 	
 	public DaoImplementacionBD() {
 		// TODO Auto-generated constructor stub
@@ -71,14 +72,15 @@ public class DaoImplementacionBD implements Dao {
 			stmt.setString(2, usu.getNombre());
 			stmt.setString(3, usu.getApellido());
 			stmt.setString(4, usu.getNomUsu());
-			//stmt.setDate(5, "18-02-2024");
-			stmt.setString(5, usu.getEmail());
-			stmt.setString(6, usu.getContraseina());
+			stmt.setDate(5, java.sql.Date.valueOf(usu.getFechaNac()));
+			stmt.setString(6, usu.getEmail());
+			stmt.setString(7, usu.getContraseina());
 			rs = stmt.executeUpdate();
 			
 			
 			stmt=con.prepareStatement(REGISTRO_CLI);
-			stmt.setString(1, cli.getGenero());
+			stmt.setString(1, usu.getDni());
+			stmt.setString(2, cli.getGenero());
 			rs = stmt.executeUpdate();
 			
 			

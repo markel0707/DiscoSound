@@ -8,8 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import modelo.Dao;
 import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.Font;
@@ -28,6 +26,7 @@ import javax.swing.UIManager;
 import com.toedter.calendar.JCalendar;
 
 import clase.Usuario;
+import controlador.Dao;
 
 public class VRegistro1 extends JDialog implements ActionListener {
 
@@ -41,6 +40,7 @@ public class VRegistro1 extends JDialog implements ActionListener {
 	private JCalendar calendario;
 
 	public VRegistro1(Dao dao) {
+		this.dao=dao;
 		setBounds(100, 100, 900, 645);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(255, 128, 0));

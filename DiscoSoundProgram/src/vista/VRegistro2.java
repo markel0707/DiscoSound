@@ -13,7 +13,9 @@ import javax.swing.border.EmptyBorder;
 
 import clase.Cliente;
 import clase.Usuario;
-import modelo.Dao;
+import controlador.Dao;
+import modelo.DaoImplementacionBD;
+
 import java.awt.Color;
 import javax.swing.JTextField;
 import java.awt.Font;
@@ -145,6 +147,10 @@ public class VRegistro2 extends JDialog implements ActionListener {
 	private void siguiente() {
 		
 		Cliente cli =new Cliente();
+		
+
+    
+		
 		usu.setNombre(textNombre.getText());
 		usu.setApellido(textApellido.getText());
 		usu.setNomUsu(textUsuario.getText());
@@ -155,6 +161,7 @@ public class VRegistro2 extends JDialog implements ActionListener {
 			cli.setGenero("mujer");
 		}
 		dao.registro(usu, cli);
+		
 		
 		
 	}

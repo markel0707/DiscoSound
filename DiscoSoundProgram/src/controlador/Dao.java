@@ -1,4 +1,4 @@
-package modelo;
+package controlador;
 
 import clase.Cliente;
 import clase.Usuario;
