@@ -29,7 +29,6 @@ public class VRegistro2 extends JDialog implements ActionListener {
 	private Dao dao;
 	private JTextField textNombre;
 	private JTextField textApellido;
-	private JTextField textUsuario;
 	private JTextField textContraseina;
 	private ButtonGroup bgGenero = new ButtonGroup();
 	private JCheckBox checkBoxHombre;
@@ -89,18 +88,6 @@ public class VRegistro2 extends JDialog implements ActionListener {
 		textApellido.setBounds(334, 214, 172, 25);
 		contentPanel.add(textApellido);
 
-		textUsuario = new JTextField();
-		textUsuario.setFont(new Font("Tahoma", Font.BOLD, 16));
-		textUsuario.setColumns(10);
-		textUsuario.setBackground(Color.LIGHT_GRAY);
-		textUsuario.setBounds(334, 282, 172, 25);
-		contentPanel.add(textUsuario);
-
-		JLabel lblNomUsu = new JLabel("Usuario");
-		lblNomUsu.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNomUsu.setBounds(334, 259, 93, 13);
-		contentPanel.add(lblNomUsu);
-
 		JLabel lblContraseina = new JLabel("Contraseña");
 		lblContraseina.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblContraseina.setBounds(334, 317, 93, 13);
@@ -153,7 +140,6 @@ public class VRegistro2 extends JDialog implements ActionListener {
 		
 		usu.setNombre(textNombre.getText());
 		usu.setApellido(textApellido.getText());
-		usu.setNomUsu(textUsuario.getText());
 		usu.setContraseina(textContraseina.getText());
 		if(checkBoxHombre.isSelected()) {
 			cli.setGenero("hombre");

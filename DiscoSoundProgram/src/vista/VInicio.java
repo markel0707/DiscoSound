@@ -23,7 +23,7 @@ public class VInicio extends JFrame implements ActionListener {
 
 	public VInicio(Dao dao) {
 		this.dao = dao;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(100, 100, 900, 645);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 128, 0));

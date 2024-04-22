@@ -27,6 +27,7 @@ import java.awt.Color;
 		private JTextField datoContrasena;
 		private Dao dao;
 		public ViniciarSesion(Dao dao) {
+			this.dao=dao;
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setBounds(100, 100, 900, 645);
 			contentPane = new JPanel();

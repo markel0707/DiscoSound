@@ -38,9 +38,10 @@ public class VRegistro1 extends JDialog implements ActionListener {
 	private JButton btnSiguiente;
 	private JButton btnAtras;
 	private JCalendar calendario;
+	private JTextField textUsuario;
 
 	public VRegistro1(Dao dao) {
-		this.dao=dao;
+		this.dao = dao;
 		setBounds(100, 100, 900, 645);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(255, 128, 0));
@@ -66,7 +67,7 @@ public class VRegistro1 extends JDialog implements ActionListener {
 		contentPanel.add(textDni);
 
 		JLabel lblFechaNac = new JLabel("Fecha de nacimiento");
-		lblFechaNac.setBounds(288, 188, 172, 13);
+		lblFechaNac.setBounds(288, 277, 172, 13);
 		lblFechaNac.setFont(new Font("Tahoma", Font.BOLD, 16));
 		contentPanel.add(lblFechaNac);
 
@@ -95,8 +96,20 @@ public class VRegistro1 extends JDialog implements ActionListener {
 		contentPanel.add(btnSiguiente);
 
 		calendario = new JCalendar();
-		calendario.setBounds(287, 225, 187, 134);
+		calendario.setBounds(288, 300, 187, 134);
 		contentPanel.add(calendario);
+
+		textUsuario = new JTextField();
+		textUsuario.setFont(new Font("Tahoma", Font.BOLD, 16));
+		textUsuario.setColumns(10);
+		textUsuario.setBackground(Color.LIGHT_GRAY);
+		textUsuario.setBounds(288, 221, 172, 25);
+		contentPanel.add(textUsuario);
+
+		JLabel lblNomUsu = new JLabel("Usuario");
+		lblNomUsu.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNomUsu.setBounds(288, 198, 93, 13);
+		contentPanel.add(lblNomUsu);
 	}
 
 	@Override
@@ -127,13 +140,30 @@ public class VRegistro1 extends JDialog implements ActionListener {
 
 		if (comprobarDni(textDni.getText()) && comprobarEmail(textEmail.getText())
 				&& comprobarEdad(usu.getFechaNac())) {
+
+			switch (dao.comprobarUsuario(textDni.getText(), textEmail.getText(), textUsuario.getText())) {
+			case 0:
+				JOptionPane.showMessageDialog(this, "El DNI ya existe");
+				break;
+			case 1:
+				JOptionPane.showMessageDialog(this, "El email ya existe");
+				break;
+			case 2:
+				JOptionPane.showMessageDialog(this, "El nombre de usuario ya existe");
+				break;
+			case 3:
+				usu.setDni(textDni.getText());
+				usu.setEmail(textEmail.getText());
+				usu.setNomUsu(textUsuario.getText());
+
+				VRegistro2 registro = new VRegistro2(dao, usu);
+				registro.setVisible(true);
+				this.dispose();
+				break;
+
+			}
+
 			
-			usu.setDni(textDni.getText());
-			usu.setEmail(textEmail.getText());
-			
-			VRegistro2 registro = new VRegistro2(dao, usu);
-			registro.setVisible(true);
-			this.dispose();
 
 		}
 
@@ -197,5 +227,4 @@ public class VRegistro1 extends JDialog implements ActionListener {
 		}
 
 	}
-
 }
