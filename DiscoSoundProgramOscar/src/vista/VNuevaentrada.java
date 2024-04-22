@@ -8,7 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import modelo.Dao;
+import controlador.Dao;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;

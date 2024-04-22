@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import modelo.Dao;
+import controlador.Dao;
 
 import javax.swing.JLabel;
 import java.awt.Font;

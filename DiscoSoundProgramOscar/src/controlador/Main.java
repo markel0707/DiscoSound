@@ -1,6 +1,6 @@
 package controlador;
 
-import modelo.Dao;
+import controlador.Dao;
 import modelo.DaoImplementacionBD;
 import vista.VInicio;
 

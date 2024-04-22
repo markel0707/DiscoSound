@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import modelo.Dao;
+import controlador.Dao;
 
 public class VcompraEntradas extends JDialog implements ActionListener{
 

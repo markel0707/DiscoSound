@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import modelo.Dao;
+import controlador.Dao;
 
 public class VModificarentrada2 extends JDialog implements ActionListener {
 

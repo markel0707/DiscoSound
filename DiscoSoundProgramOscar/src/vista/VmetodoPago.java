@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import modelo.Dao;
+import controlador.Dao;
 
 public class VmetodoPago extends JDialog implements ActionListener{
 
@@ -57,15 +57,19 @@ public class VmetodoPago extends JDialog implements ActionListener{
 	                "Confirmación de pago", JOptionPane.OK_CANCEL_OPTION,
 	                JOptionPane.INFORMATION_MESSAGE);
 			switch(resp) {
-			case 0:
-				
+			case JOptionPane.OK_OPTION:
+				procesarPago();
 				break;
-			case 1:
+			case JOptionPane.CANCEL_OPTION:
 				atras();
 				break;
 			}
 		}
 
+		private void procesarPago() {
+			// TODO Auto-generated method stub
+			
+		}
 		private void atras() {
 			// TODO Auto-generated method stub
 			VdescuentosDisponibles atras = new VdescuentosDisponibles(dao);
