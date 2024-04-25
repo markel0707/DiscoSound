@@ -7,8 +7,11 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
+import clase.Usuario;
 import controlador.Dao;
 
 import javax.swing.JLabel;
@@ -24,7 +27,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JTextField;
 
-public class VperfilUsuario extends JDialog implements ActionListener{
+public class VPerfilUsuario extends JDialog implements ActionListener{
 
 
 		private JPanel contentPane= new JPanel(){
@@ -47,8 +50,9 @@ public class VperfilUsuario extends JDialog implements ActionListener{
 		private JButton btnDescuentosDisp;
 		private JButton btnCambiarDatos;
 		private JButton btnCerrarSesion;
+		private Usuario usu;
 
-		public VperfilUsuario(Dao dao) {
+		public VPerfilUsuario(Dao dao, Usuario usu) {
 			
 			setBounds(100, 100, 900, 645);
 			contentPane.setBackground(new Color(255, 128, 0));
@@ -121,45 +125,50 @@ public class VperfilUsuario extends JDialog implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
-			if(e.getSource().equals(btnComprarEntradas)) {
+			if (e.getSource().equals(btnComprarEntradas)) {
 				comprarEntradas();
-			} else if(e.getSource().equals(btnDescuentosDisp)) {
+			} else if (e.getSource().equals(btnDescuentosDisp)) {
 				descuentosDisp();
-			} else if(e.getSource().equals(btnCambiarDatos)) {
+			} else if (e.getSource().equals(btnCambiarDatos)) {
 				cambiarDatos();
-			} else if(e.getSource().equals(btnCerrarSesion)) {
+			} else if (e.getSource().equals(btnCerrarSesion)) {
 				cerrarSesion();
 			}
-			
+
 		}
-		
+
+		public JTable cargarTabla() {
+			// Columnas
+			String[] columnNames = { "Codigo Entrada", "Fecha" };
+			String[] fila = new String[2];
+			DefaultTableModel model = new DefaultTableModel(null, columnNames);
+
+			return new JTable(model);
+
+		}
+
 		private void cerrarSesion() {
-			// TODO Auto-generated method stub
-			VInicio cerrarSesion = new VInicio(dao);
+			VInicio cerrarSesion = new VInicio(dao, usu);
 			cerrarSesion.setVisible(true);
 			this.dispose();
 		}
 
 		private void cambiarDatos() {
-			VcambiarDatos cambiarDatos = new VcambiarDatos(dao);
+			VCambiarDatos cambiarDatos = new VCambiarDatos(dao, usu);
 			cambiarDatos.setVisible(true);
 			this.dispose();
-			
+
 		}
 
 		private void descuentosDisp() {
-			// TODO Auto-generated method stub
-			VdescuentosDisponibles descuentosDisp = new VdescuentosDisponibles(dao);
+			VDescuentosDisponibles descuentosDisp = new VDescuentosDisponibles(dao, usu);
 			descuentosDisp.setVisible(true);
 			this.dispose();
 		}
 
 		private void comprarEntradas() {
-			VcompraEntradas compraEntradas = new VcompraEntradas(dao);
+			VCompraEntradas compraEntradas = new VCompraEntradas(dao, usu);
 			compraEntradas.setVisible(true);
 			this.dispose();
 		}
-		
 	}

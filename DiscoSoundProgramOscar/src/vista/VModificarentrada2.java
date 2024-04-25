@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import clase.Usuario;
 import controlador.Dao;
 
 public class VModificarentrada2 extends JDialog implements ActionListener {
@@ -39,9 +40,10 @@ public class VModificarentrada2 extends JDialog implements ActionListener {
 	private Dao dao;
 	private JButton btnAtras;
 	private JButton btnGuardar;
+	private Usuario usu;
 
 	
-	public VModificarentrada2(Dao dao) {
+	public VModificarentrada2(Dao dao, Usuario usu) {
 		this.dao = dao;
 		setBounds(100, 100, 900, 645);
 		getContentPane().setLayout(new BorderLayout());
@@ -135,7 +137,7 @@ public class VModificarentrada2 extends JDialog implements ActionListener {
 		
 		
 		private void atras() {
-			VModificarentrada modificar =new VModificarentrada(dao);
+			VModificarentrada modificar =new VModificarentrada(dao, usu);
 			modificar.setVisible(true);
 			this.dispose();
 		}
@@ -143,7 +145,7 @@ public class VModificarentrada2 extends JDialog implements ActionListener {
 		
 		private void guardar() {
 			JOptionPane.showMessageDialog(this, "Datos Guardado");
-			VperfilAdmin guardar = new VperfilAdmin(dao);
+			VPerfilAdmin guardar = new VPerfilAdmin(dao, usu);
 			guardar.setVisible(true);
 			this.dispose();
 			

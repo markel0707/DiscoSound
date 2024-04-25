@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import clase.Usuario;
 import controlador.Dao;
 
 import javax.swing.JLabel;
@@ -21,7 +22,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 import java.awt.Color;
 
-public class VcambiarDatos extends JDialog implements ActionListener{
+public class VCambiarDatos extends JDialog implements ActionListener{
 
 	private final JPanel contentPanel = new JPanel(){
         @Override
@@ -42,7 +43,9 @@ public class VcambiarDatos extends JDialog implements ActionListener{
 	private Dao dao;
 	private JButton btnGuardar;
 	private JButton btnAtras;
-	public VcambiarDatos(Dao dao) {
+	private Usuario usu;
+	
+	public VCambiarDatos(Dao dao, Usuario usu) {
 		setBounds(100, 100, 900, 645);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(255, 168, 0));
@@ -123,13 +126,13 @@ public class VcambiarDatos extends JDialog implements ActionListener{
 	}
 	private void atras() {
 		// TODO Auto-generated method stub
-		VperfilUsuario atras = new VperfilUsuario(dao);
+		VPerfilUsuario atras = new VPerfilUsuario(dao, usu);
 		atras.setVisible(true);
 		this.dispose();
 	}
 	private void guardar() {
 		// TODO Auto-generated method stub
-		VperfilUsuario guardar = new VperfilUsuario(dao);
+		VPerfilUsuario guardar = new VPerfilUsuario(dao, usu);
 		guardar.setVisible(true);
 		this.dispose();
 	}

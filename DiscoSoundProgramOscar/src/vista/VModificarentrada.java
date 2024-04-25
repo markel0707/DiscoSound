@@ -9,6 +9,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import clase.Usuario;
 import controlador.Dao;
 
 import javax.swing.JLabel;
@@ -41,9 +42,10 @@ public class VModificarentrada extends JDialog implements ActionListener{
 	private JButton btnSiguiente;
 	private JButton btnAtras;
 	private Dao dao;
+	private Usuario usu;
 
 	
-	public VModificarentrada(Dao dao) {
+	public VModificarentrada(Dao dao, Usuario usu) {
 		this.dao = dao;
 		setBounds(100, 100, 900, 645);
 		getContentPane().setLayout(new BorderLayout());
@@ -102,14 +104,14 @@ public class VModificarentrada extends JDialog implements ActionListener{
 
 
 		private void siguiente() {
-			VModificarentrada2 modificar2 =new VModificarentrada2(dao);
+			VModificarentrada2 modificar2 =new VModificarentrada2(dao, usu);
 			modificar2.setVisible(true);
 			this.dispose();
 		}
 
 
 		private void atras() {
-			VperfilAdmin atras = new VperfilAdmin(dao);
+			VPerfilAdmin atras = new VPerfilAdmin(dao, usu);
 			atras.setVisible(true);
 			this.dispose();
 			

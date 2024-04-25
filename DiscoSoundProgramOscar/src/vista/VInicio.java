@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import clase.Usuario;
 import controlador.Dao;
 import java.awt.Toolkit;
 
@@ -37,11 +38,12 @@ public class VInicio extends JFrame implements ActionListener{
 	private Dao dao;
 	
 	private Graphics2D g2d;
+	private Usuario usu;
 	
 
 
 	
-	public VInicio(Dao dao) {
+	public VInicio(Dao dao, Usuario usu) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\1dam\\Desktop\\DiscoSound\\DiscoSound\\DiscoSoundProgramOscar\\src\\img\\logoApp\\logoapp.png"));
 		this.dao=dao;
 		
@@ -88,7 +90,7 @@ public class VInicio extends JFrame implements ActionListener{
 
 
 	private void iniciarSesion() {
-		ViniciarSesion iniciarSesion =new ViniciarSesion(dao);
+		VIniciarSesion iniciarSesion =new VIniciarSesion(dao, usu);
 		iniciarSesion.setVisible(true);
 		this.dispose();
 		

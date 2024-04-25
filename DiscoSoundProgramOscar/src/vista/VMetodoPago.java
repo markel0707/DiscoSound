@@ -16,9 +16,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import clase.Usuario;
 import controlador.Dao;
 
-public class VmetodoPago extends JDialog implements ActionListener{
+public class VMetodoPago extends JDialog implements ActionListener{
 
 		private JPanel contentPane= new JPanel(){
 	        @Override
@@ -35,7 +36,8 @@ public class VmetodoPago extends JDialog implements ActionListener{
 		private Dao dao;
 		private JButton btnPagar;
 		private JButton btnAtras;
-		public VmetodoPago(Dao dao) {
+		private Usuario usu;
+		public VMetodoPago(Dao dao, Usuario Usu) {
 			
 			setBounds(100, 100, 900, 645);
 			contentPane.setBackground(new Color(255, 128, 0));
@@ -85,7 +87,7 @@ public class VmetodoPago extends JDialog implements ActionListener{
 		}
 		private void atras() {
 			// TODO Auto-generated method stub
-			VdescuentosDisponibles atras = new VdescuentosDisponibles(dao);
+			VDescuentosDisponibles atras = new VDescuentosDisponibles(dao, usu);
 			atras.setVisible(true);
 			this.dispose();
 		}

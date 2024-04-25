@@ -30,6 +30,7 @@ import javax.swing.JCheckBox;
 import javax.swing.UIManager;
 import com.toedter.calendar.JCalendar;
 
+import clase.Cliente;
 import clase.Usuario;
 
 public class VRegistro1 extends JDialog implements ActionListener {
@@ -55,6 +56,7 @@ public class VRegistro1 extends JDialog implements ActionListener {
 	private JButton btnAtras;
 	private JCalendar calendario;
 	private JTextField textUsuario;
+	private Usuario usu;
 
 	public VRegistro1(Dao dao) {
 		this.dao=dao;
@@ -134,9 +136,9 @@ public class VRegistro1 extends JDialog implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource().equals(btnSiguiente)) {
+		if (e.getSource().equals(btnSiguiente)) {
 			siguiente();
-		} else if(e.getSource().equals(btnAtras)) {
+		} else if (e.getSource().equals(btnAtras)) {
 			atras();
 		}
 	}
@@ -144,15 +146,13 @@ public class VRegistro1 extends JDialog implements ActionListener {
 	private void siguiente() {
 		String fecha;
 
-		LocalDate ahora;
-		Usuario usu = new Usuario();
+		usu = new Cliente();
 		int mes = calendario.getCalendar().get(Calendar.MONTH);
 		mes = mes + 1;
 		String mesString = Integer.toString(mes);
 
 		if (mes < 10) {
 			mesString = 0 + mesString;
-			System.out.println(mesString);
 		}
 
 		fecha = calendario.getCalendar().get(Calendar.YEAR) + "-" + mesString + "-"
@@ -160,15 +160,29 @@ public class VRegistro1 extends JDialog implements ActionListener {
 		usu.setFechaNac(LocalDate.parse(fecha));
 
 		if (comprobarDni(textDni.getText()) && comprobarEmail(textEmail.getText())
-				&& comprobarEdad(usu.getFechaNac()) ) {
-			dao.login(textDni.getText(), textEmail.getText(), textUsuario.getText());
-			usu.setDni(textDni.getText());
-			usu.setEmail(textEmail.getText());
-			usu.setNomUsu(textUsuario.getText());
-			
-			VRegistro2 registro = new VRegistro2(dao, usu);
-			registro.setVisible(true);
-			this.dispose();
+				&& comprobarEdad(usu.getFechaNac())) {
+
+			switch (dao.comprobarUsuario(textDni.getText(), textEmail.getText(), textUsuario.getText())) {
+			case 0:
+				JOptionPane.showMessageDialog(this, "El DNI ya existe");
+				break;
+			case 1:
+				JOptionPane.showMessageDialog(this, "El email ya existe");
+				break;
+			case 2:
+				JOptionPane.showMessageDialog(this, "El nombre de usuario ya existe");
+				break;
+			case 3:
+				usu.setDni(textDni.getText());
+				usu.setEmail(textEmail.getText());
+				usu.setNomUsu(textUsuario.getText());
+
+				VRegistro2 registro = new VRegistro2(dao, usu);
+				registro.setVisible(true);
+				this.dispose();
+				break;
+
+			}
 
 		}
 
@@ -177,7 +191,6 @@ public class VRegistro1 extends JDialog implements ActionListener {
 	private boolean comprobarEdad(LocalDate fechaNac) {
 
 		Period periodo = Period.between(fechaNac, LocalDate.now());
-		System.out.println("Año" + periodo.getYears() + "Mes" + periodo.getMonths() + "dia" + periodo.getDays());
 
 		if (periodo.getYears() >= 18) {
 			return true;
@@ -204,37 +217,69 @@ public class VRegistro1 extends JDialog implements ActionListener {
 	}
 
 	private boolean comprobarDni(String dni) {
-		char[] arrayLetra = { 'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V',
-				'H', 'L', 'C', 'K', 'E' };
+	    char[] arrayLetra = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V',
+	            'H', 'L', 'C', 'K', 'E'};
 
-		char letra;
-		int dniNoLetra;
-		if (dni.length() == 9) {
+	    char letra;
+	    int dniNoLetra;
 
-			letra = dni.charAt(8);
-			letra = Character.toUpperCase(letra);
+	    // Eliminar el guion si está presente
+	    dni = dni.replaceAll("-", "");
 
-			dniNoLetra = Integer.parseInt(dni.substring(0, 8));
+	    if (dni.length() == 9) { // Comprobar si es un DNI
+	        letra = dni.charAt(8);
+	        letra = Character.toUpperCase(letra);
 
-			dniNoLetra = dniNoLetra % 23;
-			if (arrayLetra[dniNoLetra] == letra) {
-				System.out.println("El DNI es valido");
-				return true;
-			} else {
-				System.out.println("DNI no valido");
-				JOptionPane.showMessageDialog(this, "DNI no valido (Los numeros no corresponden con la letra)");
-				return false;
-			}
+	        dniNoLetra = Integer.parseInt(dni.substring(0, 8));
 
-		} else {
-			JOptionPane.showMessageDialog(this, "DNI no valido ");
-			return false;
-		}
+	        dniNoLetra = dniNoLetra % 23;
+	        if (arrayLetra[dniNoLetra] == letra) {
+	            return true;
+	        } else {
+	            JOptionPane.showMessageDialog(this, "DNI no válido (Los números no corresponden con la letra)");
+	            return false;
+	        }
+	    } else if (dni.length() == 10) { // Comprobar si es un NIE
+	        char primeraLetra = Character.toUpperCase(dni.charAt(0));
+	        if (primeraLetra == 'X' || primeraLetra == 'Y' || primeraLetra == 'Z') {
+	            // Reemplazar la letra inicial según la tabla de equivalencia
+	            switch (primeraLetra) {
+	                case 'X':
+	                    dni = '0' + dni.substring(1);
+	                    break;
+	                case 'Y':
+	                    dni = '1' + dni.substring(1);
+	                    break;
+	                case 'Z':
+	                    dni = '2' + dni.substring(1);
+	                    break;
+	            }
+	            // El resto del proceso es similar al de un DNI
+	            letra = dni.charAt(8);
+	            letra = Character.toUpperCase(letra);
 
+	            dniNoLetra = Integer.parseInt(dni.substring(0, 8));
+
+	            dniNoLetra = dniNoLetra % 23;
+	            if (arrayLetra[dniNoLetra] == letra) {
+	                return true;
+	            } else {
+	                JOptionPane.showMessageDialog(this, "NIE no válido (Los números no corresponden con la letra)");
+	                return false;
+	            }
+	        } else {
+	            JOptionPane.showMessageDialog(this, "NIE no válido (Formato incorrecto)");
+	            return false;
+	        }
+	    } else {
+	        JOptionPane.showMessageDialog(this, "Número de identificación no válido");
+	        return false;
+	    }
 	}
-	
+
+
 	private void atras() {
-		VInicio atras=new VInicio(dao);
+		VInicio atras = new VInicio(dao, usu);
 		atras.setVisible(true);
 		this.dispose();
 	}

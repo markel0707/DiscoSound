@@ -16,9 +16,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import clase.Usuario;
 import controlador.Dao;
 
-public class VcompraEntradas extends JDialog implements ActionListener{
+public class VCompraEntradas extends JDialog implements ActionListener{
 
 		private JPanel contentPane= new JPanel(){
 	        @Override
@@ -35,7 +36,8 @@ public class VcompraEntradas extends JDialog implements ActionListener{
 		private Dao dao;
 		private JButton btnInicio;
 		private JButton btnPrueba;
-		public VcompraEntradas(Dao dao) {
+		private Usuario usu;
+		public VCompraEntradas(Dao dao, Usuario usu) {
 			setBounds(100, 100, 900, 645);
 			contentPane.setBackground(new Color(255, 128, 0));
 			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -70,14 +72,14 @@ public class VcompraEntradas extends JDialog implements ActionListener{
 		}
 		private void prueba() {
 			// TODO Auto-generated method stub
-			VmetodoPago prueba = new VmetodoPago(dao);
+			VMetodoPago prueba = new VMetodoPago(dao, usu);
 			prueba.setVisible(true);
 			this.dispose();
 			
 		}
 		private void inicio() {
 			// TODO Auto-generated method stub
-			VperfilUsuario inicio = new VperfilUsuario(dao);
+			VPerfilUsuario inicio = new VPerfilUsuario(dao, usu);
 			inicio.setVisible(true);
 			this.dispose();		
 			}

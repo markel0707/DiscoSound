@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import clase.Administrador;
 import clase.Usuario;
 import controlador.Dao;
 
@@ -26,7 +27,7 @@ import javax.swing.JTextField;
 import java.awt.Color;
 
 
-	public class ViniciarSesion extends JFrame implements ActionListener{
+	public class VIniciarSesion extends JFrame implements ActionListener{
 
 		private JPanel contentPane= new JPanel(){
 	        @Override
@@ -45,8 +46,9 @@ import java.awt.Color;
 		private Dao dao;
 		private JButton btnAtras;
 		private JButton btnSiguiente;
+		private Usuario usu;
 
-		public ViniciarSesion(Dao dao) {
+		public VIniciarSesion(Dao dao, Usuario usu) {
 			this.dao=dao;
 			setBounds(100, 100, 900, 645);
 			contentPane.setBackground(new Color(255, 128, 0));
@@ -98,36 +100,40 @@ import java.awt.Color;
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
+
 			if (e.getSource().equals(btnSiguiente)) {
 				siguiente();
-			} else if(e.getSource().equals(btnAtras)) {
+			} else if (e.getSource().equals(btnAtras)) {
 				atras();
 			}
 		};
 
 		private void siguiente() {
-			Usuario usu=dao.inicioSesion(datoUser.getText(), datoContrasena.getText());
-			if(usu!=null) {
-				if(datoContrasena.getText().equalsIgnoreCase("abcd*1234")) {
-					VperfilAdmin siguiente = new VperfilAdmin(dao);
+			usu = new Usuario();
+			usu.setNomUsu(datoUser.getText());
+			usu.setContraseina(datoContrasena.getText());
+
+			usu = dao.inicioSesion(usu);
+			if (usu != null) {
+				if (usu instanceof Administrador) {
+					VPerfilAdmin siguiente = new VPerfilAdmin(dao, usu);
 					siguiente.setVisible(true);
-					this.dispose();	
+					this.dispose();
 				} else {
-				VperfilUsuario siguiente = new VperfilUsuario(dao);
-				siguiente.setVisible(true);
-				this.dispose();				
+					VPerfilUsuario siguiente = new VPerfilUsuario(dao, usu);
+					siguiente.setVisible(true);
+					this.dispose();
 				}
 			} else {
-				JOptionPane.showMessageDialog(this, "Nombre de usuario o contraseña incorrecta");
+				JOptionPane.showMessageDialog(this, "Usuario o Password incorrecta");
 			}
-			
 
 		}
-		
+
 		private void atras() {
-			VInicio atras=new VInicio(dao);
+			VInicio atras = new VInicio(dao, usu);
 			atras.setVisible(true);
 			this.dispose();
 		}
+
 	}

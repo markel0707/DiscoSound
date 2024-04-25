@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import clase.Usuario;
 import controlador.Dao;
 
 import javax.swing.JLabel;
@@ -43,9 +44,10 @@ public class VNuevaentrada extends JDialog implements ActionListener{
 	private Dao dao;
 	private JButton btnAtras;
 	private JButton btnGuardar;
+	private Usuario usu;
 
 	
-	public VNuevaentrada(Dao dao) {
+	public VNuevaentrada(Dao dao, Usuario usu) {
 		setBounds(100, 100, 900, 645);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(255, 168, 0));
@@ -150,7 +152,7 @@ public class VNuevaentrada extends JDialog implements ActionListener{
 		
 		
 		private void atras() {
-			VperfilAdmin perfilad =new VperfilAdmin(dao);
+			VPerfilAdmin perfilad =new VPerfilAdmin(dao, usu);
 			perfilad.setVisible(true);
 			this.dispose();
 		}
@@ -158,7 +160,7 @@ public class VNuevaentrada extends JDialog implements ActionListener{
 		
 		private void guardar() {
 			JOptionPane.showMessageDialog(this, "Datos Guardado");
-			VperfilAdmin guardar = new VperfilAdmin(dao);
+			VPerfilAdmin guardar = new VPerfilAdmin(dao, usu);
 			guardar.setVisible(true);
 			this.dispose();
 		}

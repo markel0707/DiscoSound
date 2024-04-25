@@ -22,6 +22,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JCheckBox;
 import javax.swing.UIManager;
 
@@ -140,35 +141,34 @@ public class VRegistro2 extends JDialog implements ActionListener {
 		// TODO Auto-generated method stub
 		if (e.getSource().equals(btnSiguiente)) {
 			siguiente();
-		} else if(e.getSource().equals(btnAtras)) {
+		} else if (e.getSource().equals(btnAtras)) {
 			atras();
 		}
 	};
 
 	private void siguiente() {
-		
-		Cliente cli =new Cliente();
 
 		usu.setNombre(textNombre.getText());
 		usu.setApellido(textApellido.getText());
 		usu.setContraseina(textContraseina.getText());
-		if(checkBoxHombre.isSelected()) {
-			cli.setGenero("hombre");
-		}else if(checkBoxMujer.isSelected()) {
-			cli.setGenero("mujer");
+		if (checkBoxHombre.isSelected()) {
+			((Cliente) usu).setGenero("hombre");
+		} else if (checkBoxMujer.isSelected()) {
+			((Cliente) usu).setGenero("mujer");
 		}
-		dao.registro(usu, cli);
-		
-		
-		
-	
-		VperfilUsuario siguiente = new VperfilUsuario(dao);
-		siguiente.setVisible(true);
-		this.dispose();
+		if (usu.getContraseina().equals("abcd*1234")) {
+			JOptionPane.showMessageDialog(this, "No puedes usar esta contraseña");
+		} else {
+			dao.registro(usu);
+			VPerfilUsuario siguiente = new VPerfilUsuario(dao, usu);
+			siguiente.setVisible(true);
+			this.dispose();
+		}
+
 	}
-	
+
 	private void atras() {
-		VRegistro1 atras=new VRegistro1(dao);
+		VRegistro1 atras = new VRegistro1(dao);
 		atras.setVisible(true);
 		this.dispose();
 	}

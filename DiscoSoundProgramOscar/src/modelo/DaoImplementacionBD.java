@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import clase.Administrador;
 import clase.Cliente;
 import clase.Usuario;
 import controlador.Dao;
@@ -25,12 +26,16 @@ public class DaoImplementacionBD implements Dao {
 	private String passwordBD;
 	private String id;
 	// configuracion
-	
-	//SENTENCIAS SQL
-	final String REGISTRO_USU="insert into usuario (dni, nombre, apellido, nomusu, fechanac ,email, contraseina) values (?,?,?,?,?,?,?)";
-	final String REGISTRO_CLI="insert into cliente (dnicliente, genero) values (?,?)";
-	final String CONSULTA_USU = "select * from usuario where nomusu = ? AND contraseina = ?";
-	
+
+	// SENTENCIAS SQL
+	final String REGISTRO_USU = "insert into usuario (dni, nombre, apellido, nomusu, fechanac ,email, contraseina) values (?,?,?,?,?,?,?)";
+	final String REGISTRO_CLI = "insert into cliente (dnicliente, genero) values (?,?)";
+	final String CONSULTA_DNI = "select dni from usuario where dni=?";
+	final String CONSULTA_EMAIL = "select email from usuario where email=?";
+	final String CONSULTA_NOMUSU = "select nomUsu from usuario where nomUsu=?";
+	final String LOGIN_CLI = "select * from usuario u, cliente c where u.dni=c.DNICLIENTE and nomusu = ? AND contraseina = ?";
+	final String LOGIN_ADMIN = "select * from usuario u, administrador a where u.dni=a.dniadmin and u.nomusu = ? AND u.contraseina = ?";
+
 	public DaoImplementacionBD() {
 		// TODO Auto-generated constructor stub
 		this.configFichero = ResourceBundle.getBundle("modelo.config");
@@ -62,14 +67,12 @@ public class DaoImplementacionBD implements Dao {
 			con.close();
 	}
 
-	
-	
-	public void registro(Usuario usu, Cliente cli) {
+	public void registro(Usuario usu) {
 		this.openConnection();
-		int rs;
+		// int rs;
 		try {
-			stmt=con.prepareStatement(REGISTRO_USU);
-			
+			stmt = con.prepareStatement(REGISTRO_USU);
+
 			stmt.setString(1, usu.getDni());
 			stmt.setString(2, usu.getNombre());
 			stmt.setString(3, usu.getApellido());
@@ -77,66 +80,113 @@ public class DaoImplementacionBD implements Dao {
 			stmt.setDate(5, java.sql.Date.valueOf(usu.getFechaNac()));
 			stmt.setString(6, usu.getEmail());
 			stmt.setString(7, usu.getContraseina());
-			rs = stmt.executeUpdate();
-			
-			
-			stmt=con.prepareStatement(REGISTRO_CLI);
+			stmt.executeUpdate();
+			// rs=stmt.executeUpdate();
+
+			stmt = con.prepareStatement(REGISTRO_CLI);
 			stmt.setString(1, usu.getDni());
-			stmt.setString(2, cli.getGenero());
-			rs = stmt.executeUpdate();
-			
-			
+			stmt.setString(2, ((Cliente) usu).getGenero());
+			stmt.executeUpdate();
+
 		} catch (SQLException e) {
-	
+
 			e.printStackTrace();
 		}
 		try {
 			this.closeConnection();
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		
-		
 	}
 
 	@Override
-	public void login(String dni, String email, String nomUsu) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Usuario inicioSesion(String nomUsu, String contraseina) {
-		// TODO Auto-generated method stub
-		Usuario usu = new Usuario();
-		this.openConnection();
-
+	public int comprobarUsuario(String dni, String email, String nomUsu) {
 		ResultSet rs;
 
+		this.openConnection();
+
 		try {
-			stmt = con.prepareStatement(CONSULTA_USU);
-			stmt.setString(1, nomUsu);
-			stmt.setString(2, contraseina);
+			stmt = con.prepareStatement(CONSULTA_DNI);
+			stmt.setString(1, dni);
 			rs = stmt.executeQuery();
 
-			usu.setDni(rs.getString(1));
-			usu.setNombre(rs.getString(2));
-			usu.setApellido(rs.getString(3));
-			usu.setNomUsu(rs.getString(4));
+			if (!rs.next()) {
+				stmt = con.prepareStatement(CONSULTA_EMAIL);
+				stmt.setString(1, email);
+				rs = stmt.executeQuery();
 
-			java.sql.Date fechaSQL = rs.getDate(5);
-			LocalDate fechaNac = fechaSQL.toLocalDate();
+				if (!rs.next()) {
+					stmt = con.prepareStatement(CONSULTA_NOMUSU);
+					stmt.setString(1, nomUsu);
+					rs = stmt.executeQuery();
 
-			usu.setFechaNac(fechaNac);
+					if (!rs.next()) {
+						return 3;
+					} else {
+						return 2;
+					}
+				} else {
+					return 1;
+				}
+			} else {
+				return 0;
+			}
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return usu;
+		return 0;
+
+	}
+
+	@Override
+	public Usuario inicioSesion(Usuario usu) {
+		// TODO Auto-generated method stub
+		this.openConnection();
+		Usuario usuario = null;
+		ResultSet rs;
+
+		try {
+			stmt = con.prepareStatement(LOGIN_ADMIN);
+			stmt.setString(1, usu.getNomUsu());
+			stmt.setString(2, usu.getContraseina());
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				usuario = new Administrador();
+
+				((Administrador) usuario).setNomDiscoteca(rs.getString(2));
+			} else {
+				stmt = con.prepareStatement(LOGIN_CLI);
+				stmt.setString(1, usu.getNomUsu());
+				stmt.setString(2, usu.getContraseina());
+				rs = stmt.executeQuery();
+
+				if (rs.next()) {
+					usuario = new Cliente();
+
+					((Cliente) usuario).setGenero(rs.getString(2));
+				} else {
+					return null;
+				}
+
+			}
+			usuario.setDni(rs.getString(1));
+			usuario.setNombre(rs.getString(2));
+			usuario.setApellido(rs.getString(3));
+			usuario.setNomUsu(rs.getString(4));
+			java.sql.Date fechaSQL = rs.getDate(5);
+			usuario.setFechaNac(fechaSQL.toLocalDate());
+			usuario.setEmail(rs.getString(6));
+			usuario.setContraseina(rs.getString(7));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return usuario;
 
 	}
 

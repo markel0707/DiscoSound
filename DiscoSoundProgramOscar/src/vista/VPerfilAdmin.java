@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import clase.Usuario;
 import controlador.Dao;
 
 import javax.swing.JLabel;
@@ -22,7 +23,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 import java.awt.Color;
 
-public class VperfilAdmin extends JFrame implements ActionListener{
+public class VPerfilAdmin extends JFrame implements ActionListener{
 
 	private JPanel contentPane= new JPanel(){
         @Override
@@ -41,9 +42,10 @@ public class VperfilAdmin extends JFrame implements ActionListener{
 	private JButton btnNuevaEntrada;
 	private JButton btnModificarEntrada;
 	private JButton btnCerrarSesion;
+	private Usuario usu;
 	
 	
-	public VperfilAdmin(Dao dao) {
+	public VPerfilAdmin(Dao dao, Usuario usu) {
 		setBounds(100, 100, 900, 645);
 		contentPane.setBackground(new Color(255, 128, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -101,20 +103,20 @@ public class VperfilAdmin extends JFrame implements ActionListener{
 	}
 	private void cerrarSesion() {
 		// TODO Auto-generated method stub
-		VInicio cerrarSesion = new VInicio(dao);
+		VInicio cerrarSesion = new VInicio(dao, usu);
 		cerrarSesion.setVisible(true);
 		this.dispose();
 		
 	}
 	private void modificarEntrada() {
 		// TODO Auto-generated method stub
-		VModificarentrada modificarEntrada = new VModificarentrada(dao);
+		VModificarentrada modificarEntrada = new VModificarentrada(dao, usu);
 		modificarEntrada.setVisible(true);
 		this.dispose();
 	}
 	private void nuevaEntrada() {
 		// TODO Auto-generated method stub
-		VNuevaentrada nuevaEntrada = new VNuevaentrada(dao);
+		VNuevaentrada nuevaEntrada = new VNuevaentrada(dao, usu);
 		nuevaEntrada.setVisible(true);
 		this.dispose();
 	}

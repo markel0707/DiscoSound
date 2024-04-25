@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import clase.Usuario;
 import controlador.Dao;
 
 import javax.swing.JLabel;
@@ -20,7 +21,7 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class VdescuentosDisponibles extends JDialog implements ActionListener{
+public class VDescuentosDisponibles extends JDialog implements ActionListener{
 
 	private final JPanel contentPanel = new JPanel(){
         @Override
@@ -37,8 +38,9 @@ public class VdescuentosDisponibles extends JDialog implements ActionListener{
 	private JPanel contentPane;
 	private Dao dao;
 	private JButton btnInicio;
+	private Usuario usu;
 	
-	public VdescuentosDisponibles(Dao dao) {
+	public VDescuentosDisponibles(Dao dao, Usuario usu) {
 		setBounds(100, 100, 900, 645);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 128, 0));
@@ -69,7 +71,7 @@ public class VdescuentosDisponibles extends JDialog implements ActionListener{
 
 	private void inicio() {
 		// TODO Auto-generated method stub
-		VperfilUsuario inicio = new VperfilUsuario(dao);
+		VPerfilUsuario inicio = new VPerfilUsuario(dao, usu);
 		inicio.setVisible(true);
 		this.dispose();
 	}
