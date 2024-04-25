@@ -9,6 +9,6 @@ public interface Dao {
 	
 	public void login (String dni, String email, String nomUsu);
 	
-	public boolean inicioSesion(String nomUsu, String contraseina);
+	public Usuario inicioSesion(String nomUsu, String contraseina);
 
 }

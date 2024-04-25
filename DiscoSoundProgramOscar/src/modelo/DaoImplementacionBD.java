@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import clase.Cliente;
@@ -108,34 +109,35 @@ public class DaoImplementacionBD implements Dao {
 	}
 
 	@Override
-	public boolean inicioSesion(String nomUsu, String contraseina) {
+	public Usuario inicioSesion(String nomUsu, String contraseina) {
 		// TODO Auto-generated method stub
+		Usuario usu = new Usuario();
 		this.openConnection();
-		
+
 		ResultSet rs;
-		
+
 		try {
 			stmt = con.prepareStatement(CONSULTA_USU);
 			stmt.setString(1, nomUsu);
 			stmt.setString(2, contraseina);
 			rs = stmt.executeQuery();
-			if(rs.next()) {
-//				nomUsuDB = rs.getString(4);
-//				contraseinaDB = rs.getString(7);
-				
-				return true;
-			} else {
-				return false;
-			}
-			
-			
+
+			usu.setDni(rs.getString(1));
+			usu.setNombre(rs.getString(2));
+			usu.setApellido(rs.getString(3));
+			usu.setNomUsu(rs.getString(4));
+
+			java.sql.Date fechaSQL = rs.getDate(5);
+			LocalDate fechaNac = fechaSQL.toLocalDate();
+
+			usu.setFechaNac(fechaNac);
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return false;
-		
-		
+		return usu;
+
 	}
 
 }
